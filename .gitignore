@@ -1,0 +1,17 @@
+# Local environment and credentials (applies to all modules).
+.env
+.env.*
+!.env.example
+
+# Python and Node dependencies.
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Local logs and operating-system files.
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

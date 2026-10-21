@@ -1,0 +1,41 @@
+name: qagent-livekit
+
+services:
+  livekit:
+    image: livekit/livekit-server:v1.13.10
+    restart: unless-stopped
+    # Linux: expose RTC directly, without Docker NAT advertising a container IP.
+    network_mode: host
+    command:
+      - --config
+      - /etc/livekit/livekit.yaml
+      - --node-ip
+      - ${LIVEKIT_NODE_IP:?Set LIVEKIT_NODE_IP in .env}
+    environment:
+      LIVEKIT_KEYS: "${LIVEKIT_API_KEY:?Set LIVEKIT_API_KEY in .env}: ${LIVEKIT_API_SECRET:?Set LIVEKIT_API_SECRET in .env}"
+    volumes:
+      - ./livekit.yaml:/etc/livekit/livekit.yaml:ro
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  dashboard:
+    build: ./dashboard
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - livekit
+    environment:
+      LIVEKIT_HTTP_URL: http://127.0.0.1:7880
+      LIVEKIT_API_KEY: ${LIVEKIT_API_KEY:?Set LIVEKIT_API_KEY in .env}
+      LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET:?Set LIVEKIT_API_SECRET in .env}
+      DASHBOARD_HOST: 127.0.0.1
+      DASHBOARD_PORT: "3080"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+
+# Local runtime files, if volume mounts are added later.
+/data/
+/logs/
+*.log

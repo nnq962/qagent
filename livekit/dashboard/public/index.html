@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LiveKit · Kết nối trực tiếp</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><span class="logo" aria-hidden="true">≋</span><span>qagent <span class="muted">/ LiveKit</span></span></div>
+      <span class="tag">LOCAL DASHBOARD</span>
+    </header>
+    <section class="intro">
+      <div><p class="eyebrow">GIÁM SÁT HỘI THOẠI</p><h1>Kết nối trực tiếp</h1><p class="muted">Các phòng và người tham gia trên LiveKit Server của bạn.</p></div>
+      <button id="refresh" type="button">↻ &nbsp; Làm mới</button>
+    </section>
+    <div class="statusline"><span id="status" role="status">Đang kết nối…</span><span id="updated" class="muted">Tự cập nhật mỗi 5 giây</span></div>
+    <section class="stats" aria-label="Tổng quan">
+      <article><span>Phòng đang mở</span><strong id="room-count">—</strong></article>
+      <article><span>Người tham gia / bot</span><strong id="participant-count">—</strong></article>
+      <article><span>Track âm thanh</span><strong id="audio-count">—</strong></article>
+    </section>
+    <section class="room-section">
+      <div class="section-heading"><h2>Danh sách phòng</h2><input id="search" type="search" aria-label="Tìm phòng hoặc người tham gia" placeholder="Tìm phòng, tên hoặc identity…"></div>
+      <div id="error" role="alert" hidden></div>
+      <div id="rooms"><div class="empty">Đang tải dữ liệu…</div></div>
+    </section>
+    <footer>Chỉ xem dữ liệu · API secret được giữ ở server<span>LiveKit Server / self-hosted</span></footer>
+  </main>
+</body>
+</html>
